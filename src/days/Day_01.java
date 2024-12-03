@@ -30,7 +30,7 @@ public class Day_01 {
     int choose;
 
     public Day_01(int choose) {
-        this.file = new File("src/inputs/day01_"+choose+".txt");
+        this.file = new File("src/inputs/day01.txt");
         this.choose = choose;
     }
 
@@ -96,12 +96,11 @@ public class Day_01 {
             int sx_min = getMin(totalSize, sx_list, sx_old_map);
 
             int diff = Math.abs(dx_min-sx_min);
-            System.out.println(sx_min+" "+dx_min + " " + diff);
 
             sumDistance += diff;
 
         }
-        System.out.println(sumDistance);
+        System.out.println("Result: " + sumDistance);
     }
 
     private int getMin(int totalSize, List<Integer> list, HashMap<Integer,Integer> map){

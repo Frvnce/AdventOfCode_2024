@@ -1,4 +1,5 @@
 import days.Day_01;
+import days.Day_02;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,8 +28,8 @@ public class Main {
                 solution.solvePuzzle();
                 break;
             case 2:
-                //Day_02 sol = new Day_02(choose);
-                //sol.solvePuzzle();
+                Day_02 sol = new Day_02(choose);
+                sol.solvePuzzle();
                 break;
             case 3:
                 //Day_03 sol3 = new Day_03(choose);
