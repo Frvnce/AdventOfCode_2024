@@ -59,38 +59,26 @@ public class Day_02 {
             int nextNumber = list.get(j+1);
 
             if(currentNumber==nextNumber){
-                levelToRemove=j;
                 return false;
             }
 
             int diff = Math.abs(currentNumber-nextNumber);
-            if(currentNumber>nextNumber){
-                if(diff < 1 || diff > 3){
-                    levelToRemove=j;
-                    return false;
-                }
-                if(j==0){
-                    isDecreasing = true;
-                }
+            if(diff < 1 || diff > 3){
+                return false;
+            }
+            if(currentNumber>nextNumber && j==0){
+                isDecreasing = true;
             }
 
-            if(currentNumber<nextNumber){
-                if(diff < 1 || diff > 3){
-                    levelToRemove=j;
-                    return false;
-                }
-                if(j==0){
-                    isIncreasing = true;
-                }
+            if(currentNumber<nextNumber && j==0){
+                isIncreasing = true;
             }
 
             if(currentNumber>nextNumber && isIncreasing){
-                levelToRemove=j;
                 return false;
             }
 
             if(currentNumber<nextNumber && isDecreasing){
-                levelToRemove=j;
                 return false;
             }
 
@@ -98,18 +86,24 @@ public class Day_02 {
         return true;
     }
 
-    private boolean isSafe2(List<Integer> list){
-        if(isSafe(list)){return true;}
-        list.remove(levelToRemove);
+    private boolean isSafe2(List<Integer> list) {
+        if (isSafe(list)) {
+            return true;
+        }
+        for (int i = 0; i < list.size(); i++) {
+            var truncatedLevels = new ArrayList<>(list.subList(0, i));
+            truncatedLevels.addAll(list.subList(i + 1, list.size()));
+            if (isSafe(truncatedLevels)) {
+                return true;
+            }
+        }
         return isSafe(list);
     }
 
     private void solvePuzzleOne() throws IOException {
         HashMap<Integer, List<Integer>> map = new HashMap<>();
         getLine(map);
-
         int safeCombination = 0;
-
         for (int i = 0; i < map.size(); i++) {
             List<Integer> list = map.get(i);
             if(isSafe(list)){
@@ -117,7 +111,7 @@ public class Day_02 {
             }
         }
 
-        System.out.println("safeCombination");
+        System.out.println(safeCombination);
     }
 
     private void solvePuzzleTwo() throws IOException {
@@ -133,6 +127,6 @@ public class Day_02 {
             }
         }
 
-        System.out.println("Part 2 not working... " + safeCombination);
+        System.out.println(safeCombination);
     }
 }
